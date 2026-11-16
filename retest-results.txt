@@ -1,0 +1,20 @@
+=== DEFENSIVE SECURITY ASSESSMENT RETEST LOG ===
+Target: Local Flask Application (127.0.0.1:5000 - Authorized Lab Environment)
+Dependencies Audited: Flask==3.1.0, Werkzeug==3.1.3, pytest==8.3.4 (0 known critical CVEs)
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.5.0
+collected 3 items
+
+test_security.py::test_security_headers_and_cookie_flags PASSED          [ 33%]
+test_security.py::test_input_validation_blocks_oversized_and_xss_payloads PASSED [ 66%]
+test_security.py::test_debug_mode_disabled PASSED                        [100%]
+
+============================== 3 passed in 0.28s ===============================
+
+Verification Summary:
+[PASS] Finding 1 (Insecure Session Cookies) -> Verified HttpOnly, Secure, SameSite=Strict present.
+[PASS] Finding 2 (Missing Security Headers) -> Verified nosniff, DENY, and CSP headers returned.
+[PASS] Finding 3 (Unvalidated Input / XSS Risk) -> Verified <script> payload rejected with HTTP 400.
+[PASS] Finding 4 (Missing Security Logging) -> Verified LOGIN_FAILED and LOGIN_SUCCESS events logged without secrets.
+[PASS] Finding 5 (Debug Mode Enabled) -> Verified app.debug is False.
